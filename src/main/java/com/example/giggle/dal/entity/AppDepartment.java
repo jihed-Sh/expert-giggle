@@ -14,22 +14,28 @@ import java.util.List;
 @Table(name = "Department")
 @ToString(callSuper = true)
 public class AppDepartment {
-
+    @Column(name = "department_id")
     @Id
     private String id;
+
     private String departmentName;
+
     private String description;
+
     @OneToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "teacher_id")
     private AppTeacher head;
+
     @OneToMany
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "teacher_id")
     private List<AppTeacher> teachers;/*many to many*/
+
     @OneToMany
-    @JoinColumn(name = "stuedent_id", nullable = false)
+    @JoinColumn(name = "stuedent_id")
     private List<AppStudent> students;/*many to many*/
+
     @OneToMany
-    @JoinColumn(name = "classroom_id", nullable = false)
+    @JoinColumn(name = "classroom_id")
     private List<AppClassroom> classrooms;/*many to many*/
 
 }

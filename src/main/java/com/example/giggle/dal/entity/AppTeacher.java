@@ -17,19 +17,28 @@ public class AppTeacher {
     @Getter
     @Id
     private String id;
+
     private String firstName;
+
     private String lastName;
+
     private LocalDateTime dateOfBirth;
+
     private LocalDateTime hiredDate;
+
     @OneToOne
-    @JoinColumn(name = "department_id", nullable = false)
+    @JoinColumn(name = "department_id")
     private AppDepartment department;
-    //TODO change it to ref
-    //private List<AppClassroom> assignedClassrooms; /*(Many-to-Many Relationship)*/
-    //TODO change it to ref
-    //private List<AppAnnouncement> announcements; /*(Many-to-Many Relationship)*/
-    //TODO change it to ref
-    //    private AppContact contactInformation;
 
+    @OneToOne
+    @JoinColumn(name = "contact_id")
+    private AppContact contact;
 
+    @OneToMany
+    @JoinColumn(name = "classroom_id")
+    private List<AppClassroom> assignedClassrooms; /*(Many-to-Many Relationship)*/
+
+    @OneToMany
+    @JoinColumn(name = "announcement_id")
+    private List<AppAnnouncement> announcements; /*(Many-to-Many Relationship)*/
 }
