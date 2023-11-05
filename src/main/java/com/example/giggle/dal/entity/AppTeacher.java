@@ -1,21 +1,35 @@
 package com.example.giggle.dal.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.ToString;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@Document("Teacher")
+@Entity
+@Table(name = "Teacher")
 @ToString(callSuper = true)
-public class AppTeacher extends AppEntity {
+public class AppTeacher {
+    @Column(name = "teacher_id")
+    @Getter
+    @Id
+    private String id;
+    private String firstName;
+    private String lastName;
+    private LocalDateTime dateOfBirth;
     private LocalDateTime hiredDate;
-    //TODO change it to ref
-    private List<AppClassroom> assignedClassrooms; /*(Many-to-Many Relationship)*/
-    //TODO change it to ref
-    private List<AppAnnouncement> announcements; /*(Many-to-Many Relationship)*/
-    //TODO change it to ref
+    @OneToOne
+    @JoinColumn(name = "department_id", nullable = false)
     private AppDepartment department;
+    //TODO change it to ref
+    //private List<AppClassroom> assignedClassrooms; /*(Many-to-Many Relationship)*/
+    //TODO change it to ref
+    //private List<AppAnnouncement> announcements; /*(Many-to-Many Relationship)*/
+    //TODO change it to ref
+    //    private AppContact contactInformation;
+
+
 }

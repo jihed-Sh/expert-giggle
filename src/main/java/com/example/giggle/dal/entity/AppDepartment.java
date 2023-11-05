@@ -1,27 +1,35 @@
 package com.example.giggle.dal.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import java.util.List;
 
+@Getter
 @Data
-@Document("Department")
+@Entity
+@Table(name = "Department")
 @ToString(callSuper = true)
 public class AppDepartment {
 
     @Id
     private String id;
     private String departmentName;
-    private AppTeacher Head;
     private String description;
-    //TODO change it to ref
+    @OneToOne
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private AppTeacher head;
+    @OneToMany
+    @JoinColumn(name = "teacher_id", nullable = false)
     private List<AppTeacher> teachers;/*many to many*/
-    //TODO change it to ref
+    @OneToMany
+    @JoinColumn(name = "stuedent_id", nullable = false)
     private List<AppStudent> students;/*many to many*/
-    //TODO change it to ref
+    @OneToMany
+    @JoinColumn(name = "classroom_id", nullable = false)
     private List<AppClassroom> classrooms;/*many to many*/
 
 }
